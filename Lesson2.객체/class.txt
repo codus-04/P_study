@@ -1,0 +1,46 @@
+// Class
+
+두 학생의 국어, 영어, 수학 점수가 각각(90,80,90), (80,70,60) 이라 했을 때 어떻게 코드를 작성하나?
+변수를 6개 만든다
+kor1, eng1, math1 = 90, 80, 90
+kor2, eng2, math2 = 80, 70, 60
+
+하지만 (국어,영어,수학) 이렇게 3개의 세트가 한 학생에 대한 정보를 나타내는 것에 비해, 변수를 직접 3개씩 정의하여 
+쓰는 것은 만족스러운 코드라 할 수 없다.
+
+이런 경우에는 학생들을 지칭하는 새로운 형태를 하나 정의하고, 그 형태를 이루기 위한 요소로 (국어,영어,수학)을 정의해볼 수 있다.
+
+이를 가능하게 하는 것이 바로 class클래스 이다.
+class Student:
+    def __init__(self,kor,eng,math):
+            self.kor = kor
+            self.eng = eng
+            self.math = math
+
+__init__함수는 이 Student클래스의 형태를 정의하는, 생성자(constructor)라 불리는 함수이다.
+self는 항상 첫번째로 인자를 넣어주고, self는 학생을 지칭한다.
+인자로 넘어오는 kor,eng,math는 현재 학생의 kor,eng,math라는 값이 되어야 하기 때문에 그 값을 대입해주는 식으로
+코드를 작성하며, 이때 이러한 kor,eng,math 값을 멤버 변수라고 부른다.
+
+위의 클래스를 이용하면 다음과 같이 학생 정보를 저장하는 코드를 작성 해볼 수 있다.
+Student를 마치 함수처럼 호출 할 때 처럼 사용하며, __init__ 함수에 self 다음에 인자가 정의되어 있는 순서대로
+값을 적어주게 되면, 각각의 값을 갖는 하나의 학생 객체(instance)를 만들어 내게 된다.
+이 객체는 kor, eng, math라는 이름의 멤버변수를 가지며, 이 값들을 조회하기 위해서는 객체이름, 멤버변수이름 형태로 사용 가능하다.
+Student1 = Student(90,80,90)
+print(Student1.kor) //90
+print(Student1.eng) //80
+print(Student1.math) //90
+
+이처럼 원하는 형태의 Class를 선언하고, 해당 class를 이용하여 원하는 객체를 만들게 되면, 원하는 형태 단위로 값을 관리할 수 있다
+
+만약 멤버변수의 이름을 k,e,m 으로 정의했다면, 객체 생생 후 값을 조회할 때 이름을 k, e, m으로 사용해도 된다.
+Class Student:
+    def __init__(self,kor,eng,math):
+            self.k = kor
+            self.e = eng
+            self.m = math
+
+Student1 = Student(90,80,90)
+print(Student1.k) //90
+print(Student1.e) //80
+print(Student1.m) //90
