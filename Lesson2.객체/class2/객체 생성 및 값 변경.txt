@@ -1,0 +1,63 @@
+* class를 통한 값 변경
+- 다음과 같이 국어, 영어, 수학 점수를 포함한 학생에 대한 class를 정의하면, 객체를 생성해 새로운 학생 정보를 만들어 낼 수 있다.
+class Student:
+    def __init__(self,kor,eng,math):
+        self.kor = kor
+        self.eng = eng
+        self.math = math
+    
+student1 = Student(90,80,90)
+print(student1.kor) //90
+print(student1.eng) //80
+print(student1.math) //90
+
+- 이때 다음과 같이 코드를 작성하면 어떻게 될까?
+객체 생성 시 국어, 영어, 수학 점수가 주어지지 않아, 에러가 발생한다.
+class Student:
+    def __init__(self,kor,eng,math):
+        self.kor = kor
+        self.eng = eng
+        self.math = math
+
+student = Student()
+
+>> __init__ missing 3 required positional arguments 'kor','eng','math'
+
+- 이 경우를 해결하기 위해서는, 다음과 같이 각 인자에 값이 넘어오지 않을 때 어떤 값을 취하게 할 것인지에 대해
+설정해주면 된다. 이 경우에는 초기값을 0을 설정 하였다.
+이렇게 되면 객체 생성 시 국어, 영어, 수학 점수가 넘어오는 경우에는 그대로 값을 넣어주게 되고, 그렇지 않은
+경우에는 전부 0으로 값을 초기화하여 객체를 생성해주게 된다.
+class Student:
+    def __init__(self,kor,eng,math):
+        self.kor = kor
+        self.eng = eng
+        self.math = math
+student1 = Student(90,80,90) // 넘어간 값을 사용
+print(student1.kor) //90
+print(student1.eng) //80
+print(student1.math) //90
+
+student2 = Student() //기본 값을 사용
+print(student2.kor) //0
+print(student2.eng) //0
+print(student2.math) //0
+
+- 그렇다면 객체에 이미 들어있는 값은 어떻게 바꿀 수 있을까?
+ 변수에 들어있는 값을 수정할 때 처럼, 객체이름.매개변수 이름 = 바꿀 값 형태로 값을 변경해주면 된다.
+class Student:
+    def __init__(self,kor=0,eng=0,math=0):
+        self.kor = kor
+        self.eng = eng
+        self.math = math
+student2 = Student() // 기본 값을 사용
+print(student2.kor) //0
+print(student2.eng) //0
+print(student2.math) //0
+
+student2.kor = 90
+student2.eng = 80
+student2.math = 90
+
+print(student2.kor) //90
+print(student2.eng) //80
+print(student2.math) //90
