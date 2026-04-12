@@ -1,0 +1,71 @@
+// class를 이용한 객체 리스트
+국어, 영어, 수학 점수를 포함한 학생 5명의 정보를 쉽게 표현할 수 있나?
+이는 class를 이용한 객체 선언과 동시에, 이 각각의 객체를 원소로 갖는 리스트를 이용하여 깔끔하게 정의가 가능하다.
+class Student:
+    def __init__(self,kor,eng,math):
+        self.kor = kor
+        self.eng = eng
+        self.math = math
+students = [
+    Student(90,80,90),
+    Student(20,80,80),
+    Student(90,30,60),
+    Student(60,10,50),
+    Student(80,20,10),
+]
+student3 = students[2] // 3번째 학생 정보
+print(student3.kor)
+print(student3.eng)
+print(student3.math)
+
+// 아직 점수가 확정되지 않은 5명의 학생의 정보를 정의하기 위해서는, class 정의 시 각 점수의 기본값으로 설정해주고,
+ 다음과 같이 리스틀에 각 객체를 넣어 정의해줄 수 있다.
+class Student:
+    def __init__(self,kor=0,eng=0,math=0):
+        self.kor = kor
+        self.eng = eng
+        self.math = math
+students = []
+for _ in range(5):
+    students.append(student()) // 5명의 학생 추가
+
+student3 = students[2] // 3번째 학생의 정보
+print(student3.kor) // 0
+print(student3.eng) // 0
+print(student3.math) // 0
+
+이때 5개의 객체를 생성하는 부분은 list comprehension으로 대체가 가능하다.
+class Student:
+    def __init__(self,kor=0,eng=0,math=0):
+        self.kor = kor
+        self.eng = eng
+        self.math = math
+
+students = [Student() for _ in range(5)] // 5명의 학생 추가
+
+student3 = students[2] // 3번째 학생 정보
+print(student3.kor) // 0
+print(student3.eng) // 0
+print(student3.math) // 0
+
+// 만약 5명의 학생 정보를 입력받아 리스트를 만드는 경우라면, 다음과 같이 코드 작성이 가능하다.
+class Student:
+    def __init__(self,kor=0,eng=0,math=0):
+        self.kor = kor
+        self.eng = eng
+        self.math = math
+
+students = []
+for _ in range(5):
+    kor,eng,math = tuple(map(int,input().split()))
+    students.append(Student(kor,eng,math))
+
+student3 = students[2]
+print(f"student3: ",student3.kor,student3.eng,student3.math)
+
+>> 90 80 90
+   20 80 80
+   90 30 60
+   60 10 50
+   80 20 20
+   student3 : 90 30 60
