@@ -1,0 +1,30 @@
+in range 함수의 모습은 다음과 같다. (x,y)가 격자안에 들어오는 경우에만 True, 그렇지 않다면 False를 반환하는 함수이다.
+def in_range(x,y):
+    return 0 <= x and x < 5 and 0 <= y and y < 5
+
+이제 인접한 곳에 1이 있는지를 확인하기전에, 먼저 (nx,ny)가 격자 안에 들어오는지를 확인하면 Runtime Error를 
+방지할 수 있다.
+
+a = [[0,0,0,1,0],
+    [0,1,1,1,0],
+    [0,0,0,0,1],
+    [1,0,1,1,1,],
+    [1,0,1,1,0]]
+    
+x,y = 2,4
+dxs,dys = [0,1,0,-1], [1,0,-1,0]
+
+def in_range(x,y):
+    return 0 <= x and x < 5 and 0 <= y and y < 5
+
+cnt = 0
+for dx,dy in zip(dxs,dys):
+    nx,ny = x + dx, y + dy
+    if in_range(nx,ny) and a[nx][ny] == 1:
+        cnt += 1
+
+print(cnt)
+>> 1
+
+따라서 격자에서 상하좌우를 확인하는 경우에는 꼭 in_range함수를 이용해 격자 범위안에 들어오는지를 확인하는 것이 필수이다.
+또 dx,dy 테크닉을 격자에서 사용하는 경우에는 수학에서의 x,y가 아닌 행, 열의 의미로 x,y를 사용해야 함을 꼭 기억해야한다.
