@@ -1,0 +1,50 @@
+- case1. 그 다음 위치가 격자를 벗어나지는 않는지
+계속 진행이 가능하려면 다음 위치인 (nx,ny)가 격자 n*n을 벗어나서는 안 된다.
+이 경우 특정위치가 격자 내에 있는지 판단하는 in_range함수를 이용한다.
+
+- case2. 이미 방문했던 곳은 아닌지
+계속 진행이 가능하기 위해 추가적으로 필요한 조건은, 이미 방문했던 위치면 안 된다는 것이다.
+이미 방문했던 곳에는 0이 아닌 숫자가 적혀 있을 것이므로 정답에 해당하는 2차원 배열을 answer이라고 하면,
+answer[nx][ny]가 여전히 0이어야 한다.
+따라서 위의 두 조건을 고려한 코드는 다음과 같다.
+
+def in_range(x,y):
+    return 0 <= x and x < n and 0 <= y and y < not
+nx,ny = x + dxs[dir_num], y + dys[dir_num]
+if in_range(nx,ny) and answer[nx][ny] == 0:
+    // keep keep_moving
+
+else:
+    //rotate direction
+
+만약 해당 조건을 만족하지 않는다면 90도 틀어줘야 한다. 90도 시계방향으로 회전 했을 때 dir의 값은 0,1,2 에서는
+1씩 늘어나며, 3의 경우 0이 되므로 그 다음 방향은 (dir+1) % 4로 간단히 계산이 가능하다. 
+만약 dir을 1부터 4까지 사용했다던가, 오른쪽, 아래, 왼쪽, 위 순서가 아닌 규칙없이 방향을 나열하여 정의했다면 코드가
+비교적 간단하지는 않았을 것이다.
+
+따라서 최종 코드는 다음과 같다.
+
+n = 4
+answer = [[0] * n, for _ in range(n)]
+
+def in_range(x,y):
+    return 0 <= x and x < n and 0 <= y and y < n
+
+dxs,dys = [0,1,0,-1], [1,0,-1,0]
+x,y = 0,0
+dir_num = 0
+
+answer[x[y]] = 1
+
+for i in range(2, n*n+1):
+    nx,ny = x + dxs[dir_num], y + dys[dir_num]
+
+    if not in_range(nx,ny) or answer[nx][ny] != 0:
+        dir_num = (dir_num + 1) % 4
+        x,y = x + dxs[dir_num], y + dys[dir_num]
+        answer[x][y] = i
+
+for i in range(n):
+    for j in range(n):
+        print(answer[i][j], end='')
+    print()
